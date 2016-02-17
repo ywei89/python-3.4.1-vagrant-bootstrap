@@ -12,13 +12,6 @@ set -x # Print commands and their arguments as they are executed.
 #update package manager resources
 sudo apt-get update -y
 
-#set time zone
-area="America"
-zone="Los_Angeles"
-sudo echo "$area/$zone" > /tmp/timezone
-sudo cp -f /tmp/timezone /etc/timezone
-sudo cp -f /usr/share/zoneinfo/$area/$zone /etc/localtime
-
 ## end general config ##
 
 ## main server installs ##
@@ -31,11 +24,7 @@ sudo apt-get install -y git-core mercurial vim screen wget curl raptor-utils unz
 sudo apt-get install -y tree vim-gnome
 
 #apache, xvfb and firefox for selenium functional testing
-sudo apt-get install -y apache2 xvfb firefox 
-
-#postgres
-sudo apt-get update -y
-sudo apt-get install -y libpq-dev postgresql postgresql-contrib
+sudo apt-get install -y apache2 xvfb firefox
 
 sudo apt-get purge python-pip
 sudo apt-get install -y python-pip
@@ -46,11 +35,8 @@ sudo apt-get update -y
 
 ## virtualenv work ##
 
-sudo echo """ 
+sudo echo """
 export WORKON_HOME=~/.virtualenvs
-export PROJECT_HOME=~/dev
-export DJANGO_SETTINGS_MODULE=settings
-export SOME_SECRET_KEY=d0nt-t0uch-my-1ce-cr34m
 source /usr/local/bin/virtualenvwrapper.sh
 """ >> /home/vagrant/.bashrc
 source /home/vagrant/.bashrc
@@ -64,7 +50,7 @@ sudo ./configure
 make && sudo make install
 
 #Create a virtualenv and ACTIVATE it
-sudo pyvenv-3.4 /home/vagrant/.virtualenvs/py341 
+sudo pyvenv-3.4 /home/vagrant/.virtualenvs/py341
 
 #finished with virtualenv work
 
@@ -86,7 +72,7 @@ mkdir -p /home/vagrant/.vim/ftplugin
 sudo wget -O /home/vagrant/.vim/ftplugin/python_editing.vim http://www.vim.org/scripts/download_script.php?src_id=5492
 
 #install jedi submodule
-cd /home/vagrant/.vim/bundle/jedi-vim  
+cd /home/vagrant/.vim/bundle/jedi-vim
 sudo git submodule update --init
 
 #move packaged .vimrc into place
@@ -99,4 +85,3 @@ echo "---"
 echo "---"
 
 exit
-
