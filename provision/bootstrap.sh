@@ -24,29 +24,28 @@ sudo apt-get install -y git-core mercurial screen wget curl raptor-utils unzip a
 sudo apt-get install -y tree
 
 #apache, xvfb and firefox for selenium functional testing
-sudo apt-get install -y apache2 xvfb firefox
+sudo apt-get install -y xvfb firefox
 
-sudo apt-get purge python-pip
+sudo apt-get purge -y python-pip
 sudo apt-get install -y python-pip
 sudo apt-get update -y
 
 ## end main server installs ##
 
 #Install Python 3.4 for to run in a virtual environment
+cd /vagrant
 git clone https://github.com/yyuu/pyenv.git ~/.pyenv
 echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
 echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_profile
 echo 'eval "$(pyenv init -)"' >> ~/.bash_profile
-exec $SHELL
-pyenv install 3.4
+source ~/.bash_profile
+pyenv install 3.4.1
 pyenv rehash
 
 #finished with virtualenv work
 
 echo "---"
-echo "---"
 echo "Box provisioned! SSH in to workon a project!"
-echo "---"
 echo "---"
 
 exit
